@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>{{title}}</h1>
+  <input #searchBox name="searchBox" (keyup)="0">
+  <div class="panel-group">
+    <div class = "panel panel-default" *ngFor="let note of (notes | TagFilter:searchBox.value)">
+      <div class="panel-heading">{{note.title}}
+          <span>{{ note.title }}</span>
+          <span class="pull-right">{{note.date.date | date: 'dd/MM/yyyy'}}</span>
+      </div>
+      <div class="panel-body">{{note.content}}</div>
+      <div class="panel-footer">
+        <a class="btn btn-default" >
+          <span class="glyphicon glyphicon-edit" (click)="editNote(note)" [routerLink]="['/editNote', note.id]"></span>
+        </a>
+        <a class="btn btn-default">
+            <span class="glyphicon glyphicon-trash" (click)="deleteNote(note); $event.stopPropagation()"></span>
+        </a>
+        <span class="tags">
+          <i class="badge" *ngFor="let tag of note.tags">{{tag}}</i>
+        </span>
+        <span class="pull-right">{{note.category.label}}</span>
+      </div>
+    </div>
+  </div>
+</div>

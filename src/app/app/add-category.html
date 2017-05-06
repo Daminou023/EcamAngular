@@ -1,0 +1,14 @@
+<div class="container">
+<h2>Add an amazing Category!</h2>
+<form>
+    <div class = "form-group">
+        <label>Name:</label>
+        <input #categoryName placeholder="name" name="name" class="form-control">
+        <br>
+        <button class="btn btn-default" (click)="goBack()">Back</button>
+        <button type="submit" (click)="addCategory(categoryName.value)" id="addCategoryButton" type="button" class="btn btn-primary"> Add Category </button>
+        
+    </div>
+</form>
+
+

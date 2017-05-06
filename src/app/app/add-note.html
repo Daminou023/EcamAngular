@@ -1,0 +1,37 @@
+<div class="container">
+<h2>Add an amazing note!</h2>
+<form>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class = "form-group">
+                    <label>title:</label>
+                    <input #noteTitle name="noteTitle" class="form-control">
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class = "form-group">
+                    <div>
+                        <label>Category:</label>
+                        <select #noteCategory name="noteCategory" class="form-control">
+                            <option *ngFor="let category of categories" [ngValue]="category.label">{{category.label}}</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Date:</label>
+                        <input #noteDate type="date" class="form-control" name="noteDate" [ngModel] ="dt | date:'yyyy-MM-dd'" (ngModelChange)="dt = $event" [value]="datee | date:'yyyy-MM-dd'">
+                    </div>
+                    <div>
+                        <label>Note Content:</label>
+                        <textarea #noteContent name="noteContent" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button (click)="goBack()" id="backButton" type="button" class="btn btn-default">Back</button>
+                <button (click)="addNote( noteTitle.value, noteDate.value, noteCategory.value, noteContent.value )" id="addNoteButton" type="button" class="btn btn-primary"> Add note </button>
+                <button (click)="wrapText( noteContent)" id="tagButton" type="button" class="btn btn-primary"> add tag </button>
+            </div>         
+        </div>
+</form>
+</div>
+

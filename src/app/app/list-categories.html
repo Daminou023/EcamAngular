@@ -1,0 +1,17 @@
+<div class="container">
+	<h2>{{title}}</h2>
+    <div class=" list-group col-md-6">
+      <div *ngFor="let category of categories" >
+
+          <span class="list-group-item clearfix">
+            <span class="glyphicon glyphicon-file"></span>
+            {{ category.label }}
+            <span class="pull-right">
+               <a (click)="deleteCategory(category); $event.stopPropagation()" class="btn-xs btn-default">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+            </span>
+          </span>
+    </div> 
+    </div>       
+</div>

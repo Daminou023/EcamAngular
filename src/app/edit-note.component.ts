@@ -1,0 +1,94 @@
+import { Component, Input, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Location }  from '@angular/common';
+
+import { NotesService } from './notes.service';
+import { CategoriesService } from './categories.service';
+
+import { Category } from './category';
+import { Note } from './note';
+
+
+@Component({
+  selector: 'edit-note',
+  templateUrl: 'app/edit-note.html',
+  providers: [NotesService, CategoriesService],
+})
+
+export class editNoteComponent {
+	note:Note;
+  title = "Edit note";
+  categories : Category[];
+  noteId: number;
+
+  constructor(
+    private notesService: NotesService,
+    private categoriesService: CategoriesService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private location: Location,
+) {}
+
+getNote(): void {
+    var father = this;
+    var test = this.noteId;
+    console.log('test', test);
+
+    this.notesService.getNotes().subscribe(
+      data => this.checkId(data),
+      err => console.error(err)
+     );
+  }
+
+checkId(data:any): boolean {
+  console.log('coucou', this.noteId);
+  data.forEach((n:any) => {if(n.id === Number(this.noteId)) {this.note = n}});
+  console.log(this.note);
+  return true;
+}
+
+getCategories(): void {
+    this.categoriesService.getCategories().subscribe(
+      data => this.categories = data,
+      err => console.error(err),
+      () => console.log(this.categories)
+     );
+  }
+
+updateNote(): void {
+  this.notesService.updateNote(this.note).subscribe(
+    data => console.log(data),
+    err => console.error(err),
+    () => this.router.navigate(['/listNotes']),
+  )
+}
+
+goBack(): void {
+  this.location.back();
+}
+
+wrapText(textarea) {
+    console.log(textarea);
+    var wraperstart = '<tag>';
+    var wraperend = '</tag>';
+    var text = textarea.value;
+    var len = text.length;
+    var selectStart = textarea.selectionStart;
+    var selectEnd = textarea.selectionEnd;
+    var selectedText = text.substring(selectStart, selectEnd);
+    var replacement = wraperstart + selectedText + wraperend;
+
+    text = text.substring(0,selectStart) + replacement + text.substring(selectStart + selectedText.length, len);
+    textarea.value = text;
+}
+
+ngOnInit(): void {
+  this.route.params.subscribe(
+    params => this.noteId = params['id'],
+    err => console.error(err),
+  );
+  this.getNote();
+  this.getCategories();
+}
+
+}

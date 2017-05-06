@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>    
+<head>
+</head>
+<body> 
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" routerLink="/listNotes">ECAM Notepad</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a routerLink="/listNotes">List Notes</a></li>
+      <li><a routerLink="/addNote">Add Note</a></li>
+      <li><a routerLink="/listCategories">View Categories</a></li>
+      <li><a routerLink="/addCategory">Add Category!</a></li>
+    </ul>
+  </div>
+</nav>
+<router-outlet></router-outlet>
+</body>
+<script>
+  function wrapText(elementID, openTag, closeTag) {
+
+    var textArea = $('#' + 'form_content');
+    var len = textArea.val().length;    
+    var selectStart = textArea[0].selectionStart;
+    var selectEnd = textArea[0].selectionEnd;
+    var selectedText = textArea.val().substring(selectStart, selectEnd);
+    var replacement = openTag + selectedText + closeTag;
+    textArea.val(textArea.val().substring(0, selectStart) + replacement +
+    textArea.val().substring(selectEnd, len));
+  }
+  $('#tagButton').click(function() {
+  wrapText("NotesBundle_note_content", "<tag>", "</tag>");
+});
+</script>
+</html>

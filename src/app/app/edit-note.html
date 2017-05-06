@@ -1,0 +1,38 @@
+    <div *ngIf="note" class="container-fluid">
+    <h2>Edit this amazing note!</h2>
+        <div class="container-fluid">
+
+
+ <form>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="form-group">
+              <label>Title:</label>
+              <input class="form-control" name="email" [(ngModel)]="note.title">
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+              <label>Category:</label>
+              <select #noteCategory [(ngModel)]="note.category" class="form-control" name="cat">
+                <option *ngFor="let category of categories" [ngValue]="category">{{category.label}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Content:</label>
+              <textarea #noteContent class="form-control" name="cont" [(ngModel)]="note.content"></textarea>              
+            </div>
+            <div class="form-group">
+              <label>Date:</label>
+              <input #noteDate class="form-control" name="noteDate" type="date" [ngModel] ="note.date.date | date:'yyyy-MM-dd'" (ngModelChange)="note.date.date = $event" [value]="datee | date:'yyyy-MM-dd'">
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="form-group">
+                <button (click)="goBack()" id="backButton" type="button" class="btn btn-default">Back</button>
+                <button (click)="updateNote()" id="tagButton" type="button" class="btn btn-primary"> update note </button>
+                <button (click)="wrapText( noteContent)" id="tagButton" type="button" class="btn btn-primary"> add tag </button>
+            </div>
+        </div>
+    </div>
+</form>
