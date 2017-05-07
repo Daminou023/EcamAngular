@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { Note } from './note';
 import { NotesService } from './notes.service';
 import { Router} from '@angular/router';
@@ -17,7 +17,8 @@ export class listNotesComponent {
 
   	constructor(
   	private notesService: NotesService,
-  	private router: Router) { }
+  	private router: Router,
+    elementRef: ElementRef) { }
 
 	getNotes(): void {
     this.notesService.getNotes().subscribe(

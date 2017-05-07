@@ -44,10 +44,9 @@ export class addNoteComponent {
 
   	this.notesService.createNote(title,date,category,content).subscribe(
         data => console.log('data: ', data),
-        err => console.error(err),
-        () => console.log('hey') 
+        err => alert(err._body),
+        () => this.router.navigate(['/listNotes']) 
       );
-  	this.router.navigate(['/listNotes']);
   }
 
   getCategories(): void {

@@ -36,7 +36,7 @@ getNote(): void {
 
     this.notesService.getNotes().subscribe(
       data => this.checkId(data),
-      err => console.error(err)
+      err => alert(err._body),
      );
   }
 
@@ -44,13 +44,14 @@ checkId(data:any): boolean {
   console.log('coucou', this.noteId);
   data.forEach((n:any) => {if(n.id === Number(this.noteId)) {this.note = n}});
   console.log(this.note);
+  this.postProcess();
   return true;
 }
 
 getCategories(): void {
     this.categoriesService.getCategories().subscribe(
       data => this.categories = data,
-      err => console.error(err),
+      err => alert(err._body),
       () => console.log(this.categories)
      );
   }
@@ -58,7 +59,7 @@ getCategories(): void {
 updateNote(): void {
   this.notesService.updateNote(this.note).subscribe(
     data => console.log(data),
-    err => console.error(err),
+    err => alert(err._body),
     () => this.router.navigate(['/listNotes']),
   )
 }
@@ -66,6 +67,11 @@ updateNote(): void {
 goBack(): void {
   this.location.back();
 }
+
+postProcess(): void {
+  this.note.content = this.note.content.replace(/<\/?content>/g,' ');
+  this.note.content = this.note.content.replace(/<\/?note>/g,' ');
+};
 
 wrapText(textarea) {
     console.log(textarea);

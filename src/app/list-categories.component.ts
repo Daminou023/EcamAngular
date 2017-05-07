@@ -33,7 +33,7 @@ export class listCategoriesComponent {
   deleteCategory(category: Category): void {
     this.categoriesService.deleteCategory(category.id).subscribe(
       data => this.categories = this.categories.filter( cat => cat!== category),
-      err => console.log(err),
+      err => alert(err._body),
       () => console.log(this.categories)
     );
   }

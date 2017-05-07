@@ -16,7 +16,7 @@ import { NotesService } from './notes.service';
 import { CategoriesService } from './categories.service';
 
 
-import { AppRoutingModule }     from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   imports: [ 
@@ -36,7 +36,7 @@ import { AppRoutingModule }     from './app-routing.module';
 		TagFilter
 	],
 
-	providers: [ NotesService, CategoriesService],
+	providers: [ NotesService, CategoriesService, {provide: LocationStrategy, useClass:HashLocationStrategy}],
   	bootstrap: [ AppComponent ]
 })
 

@@ -1,9 +1,13 @@
 <div class="container">
-  <h1>{{title}}</h1>
-  <input #searchBox name="searchBox" (keyup)="0">
+<div class="row container">
+  <h2>{{title}}</h2>
+  <input #searchBox name="searchBox" placeholder="search for your note!" (keyup)="0">
+</div>
+<br>
+<div class="row container">
   <div class="panel-group">
     <div class = "panel panel-default" *ngFor="let note of (notes | TagFilter:searchBox.value)">
-      <div class="panel-heading">{{note.title}}
+      <div class="panel-heading">
           <span>{{ note.title }}</span>
           <span class="pull-right">{{note.date.date | date: 'dd/MM/yyyy'}}</span>
       </div>
@@ -22,4 +26,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

@@ -18,20 +18,4 @@
 </nav>
 <router-outlet></router-outlet>
 </body>
-<script>
-  function wrapText(elementID, openTag, closeTag) {
-
-    var textArea = $('#' + 'form_content');
-    var len = textArea.val().length;    
-    var selectStart = textArea[0].selectionStart;
-    var selectEnd = textArea[0].selectionEnd;
-    var selectedText = textArea.val().substring(selectStart, selectEnd);
-    var replacement = openTag + selectedText + closeTag;
-    textArea.val(textArea.val().substring(0, selectStart) + replacement +
-    textArea.val().substring(selectEnd, len));
-  }
-  $('#tagButton').click(function() {
-  wrapText("NotesBundle_note_content", "<tag>", "</tag>");
-});
-</script>
 </html>
