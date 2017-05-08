@@ -10,6 +10,7 @@ import { Note } from './note';
 export class NotesService {
 
 	private notesUrl = 'http://localhost:8000/API/Notes';
+	public notes: Note[];
 	private notesCreateUrl = 'http://localhost:8000/API/Notes/Create';
 	private notesDelUrl = 'http://localhost:8000/API/Notes/Delete';
 	private noteEditUrl = 'http://localhost:8000/API/Notes/Edit';
@@ -19,9 +20,21 @@ export class NotesService {
 	constructor(private http: Http) { }
 	
 	getNotes():Observable<Note[]> { 
-			return this.http.get(this.notesUrl)
-				.map((res:Response) => res.json())
-				.catch(this.handleError); 
+		var that = this;
+		return this.http.get(this.notesUrl)
+				.map(function(res:Response) {
+					res.json();
+					console.log('GETresult', res.json());
+					that.notes = res.json();
+					console.log('this:', that);
+					return res.json();
+				},that)
+				.catch(this.handleError); 		
+	}
+
+	giveNotes() {
+		console.log('giving notes:', this.notes);
+		return this.notes;
 	}
 
 	private handleError(error: any): Promise<any> {

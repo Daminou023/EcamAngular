@@ -1,6 +1,9 @@
 <div class="container">
-<h2>Add an amazing note!</h2>
-<form>
+<div *ngIf="categories?.length === 0" class="alert container-fluid alert-warning">
+  There a no categories yet! add one first.
+  </div>
+<h2>Add a new note</h2>  
+<form *ngIf="categories?.length !== 0">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class = "form-group">

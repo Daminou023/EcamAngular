@@ -33,11 +33,11 @@ getNote(): void {
     var father = this;
     var test = this.noteId;
     console.log('test', test);
-
     this.notesService.getNotes().subscribe(
       data => this.checkId(data),
       err => alert(err._body),
      );
+    this.notesService.giveNotes();
   }
 
 checkId(data:any): boolean {
@@ -57,6 +57,10 @@ getCategories(): void {
   }
 
 updateNote(): void {
+  if(!this.note.title || !this.note.date || !this.note.category || !this.note.content) {
+    alert ("please fill in all the fields");
+    return;
+  }
   this.notesService.updateNote(this.note).subscribe(
     data => console.log(data),
     err => alert(err._body),
@@ -69,8 +73,8 @@ goBack(): void {
 }
 
 postProcess(): void {
-  this.note.content = this.note.content.replace(/<\/?content>/g,' ');
-  this.note.content = this.note.content.replace(/<\/?note>/g,' ');
+  this.note.content = this.note.content.replace(/<\/?content>/g,'');
+  this.note.content = this.note.content.replace(/<\/?note>/g,'');
 };
 
 wrapText(textarea) {

@@ -1,10 +1,13 @@
 <div class="container">
-<div class="row container">
+  <div *ngIf="notes?.length === 0" class="alert alert-warning">
+  There a no notes yet! You should add one!</div>
   <h2>{{title}}</h2>
-  <input #searchBox name="searchBox" placeholder="search for your note!" (keyup)="0">
-</div>
 <br>
-<div class="row container">
+
+<div class="row container" *ngIf="notes?.length !== 0">
+  <input #searchBox name="searchBox" placeholder="search for your note!" (keyup)="0">
+  <br>
+  <br>
   <div class="panel-group">
     <div class = "panel panel-default" *ngFor="let note of (notes | TagFilter:searchBox.value)">
       <div class="panel-heading">

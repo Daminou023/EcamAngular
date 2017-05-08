@@ -25,10 +25,13 @@ export class addCategoryComponent {
 
   addCategory(name: string) : void {
   	name = name.trim();
-  	if(!name) { return; }
+  	if(!name) { 
+      alert('you forgot to add a category!');
+      return;
+    }
   	this.categoriesService.createCategory(name).subscribe(
         data => console.log(data),
-        err => console.log(err),
+        err => { alert(err._body); return;},
         () => this.router.navigate(['/listCategories'])
         );
   }

@@ -40,7 +40,16 @@ export class addNoteComponent {
   	category = category.trim();
   	content = content.trim();
   	
-  	if(!title || !date || !category || !content) { console.log('please complete everything'); return; }
+  	if(!title || !date || !category || !content) { 
+      var message = 'Oops! you forgot to include: \n';
+      !title?message += '- title\n':console.log('ok');
+      !date?message+='-date\n':console.log('ok');
+      !category?message+='-category\n':console.log('ok');
+      !content?message+='-content\n':console.log('ok');
+      message+='Please fill in all the fields.';
+      alert(message);
+      return;
+    }
 
   	this.notesService.createNote(title,date,category,content).subscribe(
         data => console.log('data: ', data),
