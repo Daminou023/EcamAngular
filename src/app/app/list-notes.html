@@ -20,7 +20,7 @@
           <span class="glyphicon glyphicon-edit" (click)="editNote(note)" [routerLink]="['/editNote', note.id]"></span>
         </a>
         <a class="btn btn-default">
-            <span class="glyphicon glyphicon-trash" (click)="deleteNote(note); $event.stopPropagation()"></span>
+            <span class="glyphicon glyphicon-trash" (click)="deleteNote(note)"></span>
         </a>
         <span class="tags">
           <i class="badge" *ngFor="let tag of note.tags">{{tag}}</i>

@@ -51,7 +51,7 @@ export class addNoteComponent {
       return;
     }
 
-  	this.notesService.createNote(title,date,category,content).subscribe(
+  this.notesService.createNote(title,date,category,content).subscribe(
         data => console.log('data: ', data),
         err => alert(err._body),
         () => this.router.navigate(['/listNotes']) 

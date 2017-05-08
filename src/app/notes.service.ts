@@ -33,6 +33,7 @@ export class NotesService {
 	}
 
 	giveNotes() {
+		console.log('give This:', this)
 		console.log('giving notes:', this.notes);
 		return this.notes;
 	}

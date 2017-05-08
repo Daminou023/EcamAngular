@@ -15,7 +15,7 @@ import { Note } from './note';
   providers: [NotesService, CategoriesService],
 })
 
-export class editNoteComponent {
+export class editNoteComponent implements OnInit {
 	note:Note;
   title = "Edit note";
   categories : Category[];
@@ -30,20 +30,16 @@ export class editNoteComponent {
 ) {}
 
 getNote(): void {
-    var father = this;
-    var test = this.noteId;
-    console.log('test', test);
+    this.notesService.giveNotes();
     this.notesService.getNotes().subscribe(
       data => this.checkId(data),
       err => alert(err._body),
+      () => console.log('got data'),
      );
-    this.notesService.giveNotes();
   }
 
 checkId(data:any): boolean {
-  console.log('coucou', this.noteId);
   data.forEach((n:any) => {if(n.id === Number(this.noteId)) {this.note = n}});
-  console.log(this.note);
   this.postProcess();
   return true;
 }
@@ -52,7 +48,7 @@ getCategories(): void {
     this.categoriesService.getCategories().subscribe(
       data => this.categories = data,
       err => alert(err._body),
-      () => console.log(this.categories)
+      () => console.log('cat:', this.categories)
      );
   }
 
